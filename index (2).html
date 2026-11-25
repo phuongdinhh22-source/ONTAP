@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ôn vần: an, ăn, ân, on, ôn, ơn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfdff;--grid:#cfe3f6;--ink:#1d2b53;--card:#fff;--line:#bcd4ec;--ok:#1f9d55;--bad:#e0483e;--c:#2f7de1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101a2e;--grid:#1c2c4a;--ink:#eaf1ff;--card:#18253f;--line:#33496e}}
+:root[data-theme="dark"]{--bg:#101a2e;--grid:#1c2c4a;--ink:#eaf1ff;--card:#18253f;--line:#33496e}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:"Baloo 2","Segoe UI",Arial,sans-serif;color:var(--ink);font-size:20px;
+background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+main{max-width:860px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:clamp(28px,6vw,44px);margin:8px 0 4px;line-height:1.15}
+h2{font-size:26px;margin:36px 0 12px}
+p{margin:4px 0}
+.sub{opacity:.8}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.tab{font:800 30px/1 inherit;font-family:inherit;min-width:84px;padding:10px 16px;border-radius:16px;border:3px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--c);border-color:var(--c);color:#fff;transform:translateY(-3px)}
+.tab:focus-visible,.btn:focus-visible,.opt:focus-visible,.word:focus-visible{outline:4px solid #ffb703;outline-offset:2px}
+.panel{background:var(--card);border:3px solid var(--c);border-radius:22px;padding:18px}
+.big{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.vanbig{font-size:clamp(80px,22vw,130px);font-weight:800;color:var(--c);line-height:1}
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:14px}
+.word{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 6px;border:2px dashed var(--line);border-radius:16px;background:var(--bg);color:var(--ink);font-family:inherit;font-size:26px;font-weight:700}
+.word .e{font-size:44px}
+.word b{color:var(--c)}
+.sent{margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--bg);border-left:8px solid var(--c);font-size:24px;font-weight:600}
+.btn{font:700 20px inherit;font-family:inherit;padding:8px 18px;border-radius:999px;border:3px solid var(--c);background:var(--card);color:var(--ink);cursor:pointer}
+.btn.pri{background:var(--c);color:#fff}
+canvas{width:100%;height:auto;aspect-ratio:3/1;touch-action:none;background:var(--bg);border:2px solid var(--line);border-radius:14px;display:block;margin:10px 0}
+.gq{text-align:center}
+.gq .e{font-size:84px;line-height:1.1}
+.gw{font-size:54px;font-weight:800;letter-spacing:2px}
+.gw .blank{display:inline-block;min-width:96px;border-bottom:5px solid var(--ink);color:var(--c);position:relative}
+.gw .blank[data-t]::before{content:attr(data-t);position:absolute;left:50%;top:-.35em;transform:translateX(-50%);color:var(--ink);font-size:1em;line-height:1}
+.gw{margin-top:18px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.opt{font:800 34px inherit;font-family:inherit;padding:12px 0;border-radius:16px;border:3px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.opt.right{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.wrong{background:var(--bad);border-color:var(--bad);color:#fff}
+.msg{min-height:34px;font-weight:700;font-size:24px;margin-top:10px}
+.bar{height:14px;border-radius:9px;background:var(--grid);overflow:hidden;margin-bottom:10px}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.final{text-align:center;font-size:30px}
+.final .e{font-size:80px}
+@media (max-width:480px){.opts{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<h1>Ôn vần: an – ăn – ân – on – ôn – ơn</h1>
+<p class="sub">Đọc to các vần và từ. Rồi tập viết và chơi trò chơi nhé!</p>
+
+<h2>1. Tập đọc</h2>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="panel" id="panel">
+  <div class="big">
+    <div class="vanbig" id="vanbig"></div>
+    <div><p id="vname" style="font-size:26px;font-weight:700"></p></div>
+  </div>
+  <div class="words" id="words"></div>
+  <div class="sent" id="sent"></div>
+</div>
+
+<h2>2. Em hãy viết ra vở</h2>
+<div class="panel" id="wpanel">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0" id="wsel"></div>
+  <canvas id="cv" width="900" height="300" aria-label="Khung tập viết"></canvas>
+  <button class="btn" id="clr">🧽 Xóa viết lại</button>
+</div>
+
+<h2>3. Trò chơi điền vần</h2>
+<div class="panel" id="game"></div>
+</main>
+
+<script>
+const V=[
+{v:"an",c:"#2f7de1",w:[["đàn","🎹","đ","huyền"],["lan","🌸","l",""],["bàn tay","✋","b","huyền","bàn tay"],["nhà sàn","🛖","s","huyền","nhà sàn"]],s:"Bé có đàn. Mẹ tưới hoa lan."},
+{v:"ăn",c:"#e0483e",w:[["trăn","🐍","tr",""],["khăn","🧣","kh",""],["răng","🦷","r","",""],["ăn cơm","🍚","","","ăn cơm"]],s:"Bé ăn cơm. Bé đeo khăn."},
+{v:"ân",c:"#1f9d55",w:[["chân","🦶","ch",""],["cân","⚖️","c",""],["sân","⚽","s",""],["thân cây","🌳","th","","thân cây"]],s:"Bé có hai chân. Bé ra sân chơi."},
+{v:"on",c:"#d97706",w:[["nón","👒","n","sắc"],["hòn đá","🪨","h","huyền","hòn đá"],["con","🐣","c",""],["tròn","⚪","tr","huyền"]],s:"Bé đội nón. Hòn đá tròn."},
+{v:"ôn",c:"#8e44ad",w:[["chồn","🦊","ch","huyền"],["bồn hoa","🌷","b","huyền","bồn hoa"],["ôn bài","📖","","","ôn bài"],["tôn","🏠","t","","mái tôn"]],s:"Bé ôn bài. Chồn ở bồn hoa."},
+{v:"ơn",c:"#0e9aa7",w:[["sơn","🎨","s",""],["cơn mưa","🌧️","c","","cơn mưa"],["cảm ơn","🙏","","","cảm ơn"],["đơn","📝","đ","","đơn xin"]],s:"Bé nói cảm ơn. Cơn mưa đến."}
+];
+const $=id=>document.getElementById(id);
+let cur=0;
+function show(i){
+  cur=i;const d=V[i];
+  document.documentElement.style.setProperty("--c",d.c);
+  [...$("tabs").children].forEach((b,k)=>b.setAttribute("aria-selected",k===i));
+  $("vanbig").textContent=d.v;$("vname").textContent="Vần "+d.v;
+  $("words").innerHTML="";
+  d.w.forEach(w=>{
+    const b=document.createElement("div");b.className="word";
+    const txt=w[0];const hl=w[2]!==undefined&&txt.includes(d.v)?txt.replace(d.v,"<b>"+d.v+"</b>"):txt;
+    b.innerHTML='<span class="e">'+w[1]+'</span><span>'+(txt.includes(d.v)?hl:txt.replace(/(an|ăn|ân|on|ôn|ơn)/,"<b>$1</b>"))+'</span>';
+    $("words").appendChild(b);
+  });
+  $("sent").textContent=d.s;
+  drawGuide(i);
+  [...$("wsel").children].forEach((b,k)=>b.classList.toggle("pri",k===i));
+}
+V.forEach((d,i)=>{
+  const t=document.createElement("button");t.className="tab";t.role="tab";t.textContent=d.v;t.onclick=()=>show(i);$("tabs").appendChild(t);
+  const s=document.createElement("button");s.className="btn";s.textContent=d.v;s.onclick=()=>show(i);$("wsel").appendChild(s);
+});
+
+/* tập viết */
+const cv=$("cv"),cx=cv.getContext("2d");let drawing=false;
+function drawGuide(i){
+  cx.clearRect(0,0,cv.width,cv.height);
+  const col=getComputedStyle(document.body).color;
+  cx.strokeStyle="rgba(120,160,210,.45)";cx.lineWidth=2;cx.setLineDash([8,8]);
+  [90,150,210].forEach(y=>{cx.beginPath();cx.moveTo(0,y);cx.lineTo(cv.width,y);cx.stroke()});
+  cx.setLineDash([]);
+  cx.font="800 190px 'Baloo 2',Arial,sans-serif";cx.textBaseline="alphabetic";cx.fillStyle=V[i].c+"44";
+  const w=cx.measureText(V[i].v+" ").width;
+  for(let x=20;x+w<cv.width+20;x+=w)cx.fillText(V[i].v,x,225);
+}
+function pos(e){const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]}
+cv.addEventListener("pointerdown",e=>{drawing=true;cv.setPointerCapture(e.pointerId);const[p,q]=pos(e);cx.beginPath();cx.moveTo(p,q);cx.lineWidth=10;cx.lineCap="round";cx.lineJoin="round";cx.strokeStyle=V[cur].c});
+cv.addEventListener("pointermove",e=>{if(!drawing)return;const[p,q]=pos(e);cx.lineTo(p,q);cx.stroke()});
+["pointerup","pointercancel"].forEach(n=>cv.addEventListener(n,()=>drawing=false));
+$("clr").onclick=()=>drawGuide(cur);
+
+/* trò chơi */
+const Q=[
+["🦶","ch","ân","chân",""],["🐍","tr","ăn","trăn",""],["🧣","kh","ăn","khăn",""],["👒","n","on","nón","sắc"],
+["🦊","ch","ôn","chồn","huyền"],["🎹","đ","an","đàn","huyền"],["⚽","s","ân","sân",""],["🎨","s","ơn","sơn",""],
+["🌧️","c","ơn","cơn mưa","", " mưa"],["🌸","l","an","lan",""],["🌷","b","ôn","bồn hoa","huyền"," hoa"],["🪨","h","on","hòn đá","huyền"," đá"]
+];
+const VANS=["an","ăn","ân","on","ôn","ơn"];
+let qs,qi,score,locked;
+function start(){qs=[...Q].sort(()=>Math.random()-.5).slice(0,10);qi=0;score=0;next()}
+function next(){
+  const g=$("game");locked=false;
+  if(qi>=qs.length){
+    const st=score>=9?"🌟":score>=6?"😊":"💪";
+    g.innerHTML='<div class="final"><div class="e">'+st+'</div><p>Bé đúng <b>'+score+'/'+qs.length+'</b> câu!</p><p>'+(score>=9?"Giỏi quá!":score>=6?"Khá lắm, cố lên!":"Bé ôn lại rồi chơi nữa nhé!")+'</p><br><button class="btn pri" id="again">🔄 Chơi lại</button></div>';
+    $("again").onclick=start;return;
+  }
+  const q=qs[qi];
+  g.innerHTML='<div class="bar"><i style="width:'+(qi/qs.length*100)+'%"></i></div><div class="gq"><div class="e">'+q[0]+'</div>'+
+  '<div class="gw">'+q[1]+'<span class="blank" id="bl"'+(q[4]?' data-t="'+(q[4]==="sắc"?"´":"`")+'"':'')+'>&nbsp;</span>'+(q[5]||"")+'</div>'+
+  '<div class="opts" id="opts"></div><div class="msg" id="msg" aria-live="polite"></div></div>';
+  VANS.forEach(v=>{const b=document.createElement("button");b.className="opt";b.textContent=v;
+    b.onclick=()=>{
+      if(locked)return;
+      if(v===q[2]){locked=true;b.classList.add("right");$("bl").textContent=q[3].slice(q[1].length,q[3].length-(q[5]||"").length);$("bl").removeAttribute("data-t");$("msg").textContent="Đúng rồi! "+q[3];$("msg").style.color="var(--ok)";score++;qi++;setTimeout(next,1400)}
+      else{b.classList.add("wrong");b.disabled=true;$("msg").textContent="Chưa đúng, thử lại nhé!";$("msg").style.color="var(--bad)"}
+    };$("opts").appendChild(b)});
+}
+show(0);start();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>drawGuide(cur));
+</script>
+</body>
+</html>
